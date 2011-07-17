@@ -1,0 +1,22 @@
+<application xmlns="http://ns.adobe.com/air/application/2.7"> 
+    <id>be.knuffelmama.shop.html.PrestashopMobileDashboard</id> 
+    <versionNumber>1.0</versionNumber> 
+    <filename>PrestashopMobileDashboard</filename>
+    <name>Prestashop Mobile Dashboard</name>
+    <description>
+        <text xml:lang="nl">Deze applicatie verschaft toegang tot enkele standaard backend functies van de prestashop software</text>
+    </description>
+    <copyright>Copyright (c) 2011 Vandenbussche Fotografie</copyright>
+    <initialWindow> 
+        <content>PrestashopMobileDashboard.html</content> 
+        <visible>true</visible> 
+        <width>480</width> 
+        <height>800</height> 
+    </initialWindow>
+    <icon>
+        <image16x16>app:/images/icons/icon16.png</image16x16>
+        <image32x32>app:/images/icons/icon32.png</image32x32>
+        <image48x48>app:/images/icons/icon48.png</image48x48>
+        <image64x64>app:/images/icons/icon64.png</image64x64>
+    </icon>
+</application>

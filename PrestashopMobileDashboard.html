@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Knuffelmama Shop Mobile Dashboard</title>
+        
+        <!--// Air JS alias file -->
+        <script src="js/framework/AIRAliases.js" type="text/javascript"></script>
+       
+        <!--// Stylesheets -->
+        <link href="css/mainstyle.css" rel="stylesheet" type="text/css" />
+        <link href="css/jquery-ui-1.8.14.custom.css" rel="stylesheet" type="text/css"/>
+        
+        <!--// JQuery -->
+        <script src="js/framework/jquery-1.6.2.min.js" type="text/javascript"></script>
+        <script src="js/framework/jquery-ui-1.8.14.custom.min.js" type="text/javascript"></script>
+        <script src="js/framework/jquery.xml2json.js" type="text/javascript"></script>
+        
+        <!--// JS cryptography library -->
+        <script type="text/javascript" src="js/framework/2.2.0-crypto-md5.js"></script>
+        
+        <!--// Custom Scripts -->
+        <script src="js/main.js" type="text/javascript"></script>
+        <script src="js/util.js" type="text/javascript"></script>
+        <script src="js/file.util.js" type="text/javascript"></script>
+        <script src="js/connection.js" type="text/javascript"></script>
+        
+        <!--// Classes / ViewModels -->
+        <script src="js/classes/ViewModels/customerlist.js" type="text/javascript"></script>
+        <script src="js/classes/ViewModels/orderlist.js" type="text/javascript"></script>
+        <script src="js/classes/ViewModels/orderstates.js" type="text/javascript"></script>
+        
+        <!--// Classes / Entities -->
+        <script src="js/classes/entities/order.js" type="text/javascript"></script>
+        <script src="js/classes/entities/orderstate.js" type="text/javascript"></script>
+        <script src="js/classes/entities/orderstates.js" type="text/javascript"></script>
+        <script src="js/classes/entities/product.js" type="text/javascript"></script>
+        <script src="js/classes/entities/setting.js" type="text/javascript"></script>
+        <script src="js/classes/entities/settings.js" type="text/javascript"></script>
+        
+        <!--// Classes / Service -->
+        <script src="js/classes/service/order_service.js" type="text/javascript"></script>
+        <script src="js/classes/service/orderstates_service.js" type="text/javascript"></script>
+        <script src="js/classes/service/customer_service.js" type="text/javascript"></script>
+        <script src="js/classes/service/settings_service.js" type="text/javascript"></script>
+        
+    </head>
+    
+    <body>
+        
+        <div id="tabs">
+            <ul>
+                <li><a href="#settings" name="settings">Settings</a></li>
+                <li><a href="#orders" name="orders">Orders <span id="order_count"></span></a></li>
+                <li><a href="#customers" name="customers">Customers <span id="customer_count"></span></a></li>
+                <li><a href="#search" name="settings">Search</a></li>
+            </ul>
+            
+            <div id="orders">
+                <div id="orders_content">
+                
+                </div>
+            </div>
+            
+            <div id="settings">
+                <div id="settings_content">
+                    <h3>API Key</h3>
+                    <div>
+                        <p>Gelieve hier de url van uw webshop in te geven:</p>
+                        <input type="text" id="shop_url" value="shop.knuffelmama.be" style="width: 300px;" />
+                        
+                        <p>Gelieve uw api key hier in te geven:</p>
+                        <input type="text" id="api_key" value="" style="width: 300px;" />
+                        <div id="settings_status" status="unchecked">unchecked</div>
+                    </div>
+                    
+                    <h3>View settings</h3>
+                    <div>
+                        <p>Het aantal orders dat tegelijkertijd moet worden opgehaald:</p>
+                        <input type="text" id="order_limit" value="10" style="width: 50px;" />
+                    </div>
+                </div>
+            </div>
+            
+            <div id="search">
+                 <div id="search_content">
+                
+                </div>
+            </div>
+            
+            <div id="customers">
+                <div id="customers_content">
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+        <div id="status"></div>
+        <div id="output"></div>
+        <div id="debug"></div>
+        
+    </body>
+</html>

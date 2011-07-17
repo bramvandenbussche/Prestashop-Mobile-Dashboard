@@ -1,0 +1,81 @@
+
+body * {
+    font-family: arial;
+    font-size: 11px;
+    color: #333;
+}
+
+input[type=text] {
+    padding: 4px;
+    font-size: 11px;
+    font-family: Times New Roman;
+    border: 1px solid #ccc;
+    color: #666;
+}
+
+#tabs {
+    width: 98%;
+}
+
+table.customer_table,
+table.customer_details,
+table.order_details {
+    border-collapse: collapse;
+}
+
+td.tdHeader,
+td.trHeader {
+    color: #FF0084;
+    padding: 4px;
+}
+
+td.trHeader {
+    border-bottom: 1px solid #0073EA;
+}
+
+
+table.customer_details td,
+table.order_details td { 
+    width: 100px; 
+    padding: 4px;
+}
+
+td.customer_id, td.customer_name, td.customer_email { padding: 4px; }
+td.customer_id { width: 25px; }
+td.customer_name { width: 250px; }
+td.customer_email { width: 250px; }
+
+td.amount { text-align: right; }
+
+
+/** STATUS & SETTINGS **/
+#settings_status {
+    text-transform: uppercase;
+    padding: 4px;
+    margin: 0 4px;
+    display: inline;
+    color: white;
+}
+
+#settings_status[status=unchecked] {
+    background-color: #ba1414;
+    border: 1px solid #c7abab;
+}
+
+#settings_status[status=checking] {
+    background-color: #c4833d;
+    border: 1px solid #d6c089;
+}
+
+#settings_status[status=checked] {
+    background-color: #09b50f;
+    border: 1px solid #7cd65e;
+}
+
+#status {
+    padding: 5px;
+    font-size: 9px;
+    font-family: verdana;
+    color: #999;
+    text-align: right;
+}
