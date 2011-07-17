@@ -21,6 +21,10 @@ Setting.prototype.Serialize = function() {
     str += '<value>' + this.Value + '</value>';
     str += '<description>' + this.Description + '</description>';
     str += '<type>' + this.Type + '</type>';
+    
+    str += '</setting>';
+    
+    return str;
 }
 
 Setting.prototype.Deserialize = function(xml) {

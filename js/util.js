@@ -22,8 +22,7 @@ function SetStatus(status) {
 function AddPrePendingZeros(str, nrOfZeros) {
     var totalNrOfZeros = '';
     for (i = 0; i <= nrOfZeros; i++) {
-        totalNrOfZeros += '0';
-    }
+        totalNrOfZeros += '0';    }
     
     return Right(totalNrOfZeros + str, nrOfZeros);
 }
@@ -52,8 +51,9 @@ function SerializeList(list, rootnodename) {
     var str = '<?xml version="1.0" encoding="UTF-8"?>';
     
     str += '<' + rootnodename + '>';
-    for (var i = 0; i < list.length; i++) {
-        str += list[i].Serialize();
+ 
+    for (key in list) {
+        str += list[key].Serialize();
     }
     str += '</' + rootnodename + '>';
     

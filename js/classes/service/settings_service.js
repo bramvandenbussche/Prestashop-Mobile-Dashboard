@@ -7,59 +7,86 @@
  * Version      1.0
 **/
 
-var SettingsService = function() {
+var SettingsService = new function() {
+
+    var root = this;
     
-    this.Settings = new Settings();
+    this.Settings = [];
     
     this.PS_MOBILE_AUTHORIZATION = '';
     this.PS_MOBILE_PASSWORD = '';
-}
-
-SettingsService.prototype.CreateDefaultSettings = function() {
-    this.Settings['PS_MOBILE_SHOP_URL'] = 'http://shop.knuffelmama.be';
-    this.Settings['PS_MOBILE_API_KEY'] = '1F18WAAFSXY3OJ3T0R0ZYGMKCGESQI09';
-    this.Settings['PS_MOBILE_ORDER_VIEW_LIMIT'] = 10;
-}
-
-SettingsService.prototype.LoadSettings = function() {
-    // first check to see if there is a saved settings file
-    var xml = LoadXmlFromFile('config.xml');
     
-    if (xml != undefined) {
-        // if there is, load the settings from it
-    } else {
-        // if there isn't, create the default settings
-        this.CreateDefaultSettings();
+    
+    this.CreateDefaultSettings = function() {
+        air.trace("creating default settings..");
+        
+        var PS_MOBILE_SHOP_URL = new Setting();
+        PS_MOBILE_SHOP_URL.Name = 'PS_MOBILE_SHOP_URL';
+        PS_MOBILE_SHOP_URL.Value = 'http://shop.knuffelmama.be';        
+        this.Settings['PS_MOBILE_SHOP_URL'] = PS_MOBILE_SHOP_URL;
+        
+        var PS_MOBILE_API_KEY = new Setting();
+        PS_MOBILE_API_KEY.Name = 'PS_MOBILE_API_KEY';
+        PS_MOBILE_API_KEY.Value = '1F18WAAFSXY3OJ3T0R0ZYGMKCGESQI09';
+        this.Settings['PS_MOBILE_API_KEY'] = PS_MOBILE_API_KEY;
+        
+        var PS_MOBILE_ORDER_VIEW_LIMIT = new Setting();
+        PS_MOBILE_ORDER_VIEW_LIMIT.Name = 'PS_MOBILE_ORDER_VIEW_LIMIT';
+        PS_MOBILE_ORDER_VIEW_LIMIT.Value = 10;
+        this.Settings['PS_MOBILE_ORDER_VIEW_LIMIT'] = PS_MOBILE_ORDER_VIEW_LIMIT;
     }
     
-    // save them
-    this.PersistSettings();
     
-    // and display them
-    this.RenderSettings();
-}
+    this.LoadSettings = function() {
+        // first check to see if there is a saved settings file
+        var xml = LoadXmlFromFile('config.xml');
+        
+        if (xml != undefined) {
+            // if there is, load the settings from it
+            $.each($("setting", xml), function() {
+                var s = new Setting();
+                s.Deserialize($(this));
+                
+                this.Settings[s.Name] = s;
+            });
+            
+        } else {
+            // if there isn't, create the default settings
+            this.CreateDefaultSettings();
+            
+            // save them
+            this.PersistSettings();
+        }
+        
+        // and display them
+        this.RenderSettings();
+    }
+    
+    
+    this.RenderSettings = function() {
+        // Shop url
+        $("#shop_url").val(this.Settings['PS_MOBILE_SHOP_URL']);
+        
+        // Api Key instellen
+        $("#api_key").val(this.Settings['PS_MOBILE_API_KEY']);
+        
+        // View settings
+        $("#order_limit").val(this.Settings['PS_MOBILE_ORDER_VIEW_LIMIT']);
+    }
 
-SettingsService.prototype.RenderSettings = function() {
-    // Shop url
-    $("#shop_url").val(this.Settings['PS_MOBILE_SHOP_URL']);
-    
-    // Api Key instellen
-    $("#api_key").val(this.Settings['PS_MOBILE_API_KEY']);
-    
-    // View settings
-    $("#order_limit").val(this.Settings['PS_MOBILE_ORDER_VIEW_LIMIT']);
-}
+    this.ChangeSetting = function(key, newvalue) {
+        // Setting aanpassen
+        this.Settings[key] = newvalue;
+        
+        // en opslaan naar file
+        this.PersistSettings();
+    }
 
-SettingsService.prototype.ChangeSetting = function(key, newvalue) {
-    // Setting aanpassen
-    this.Settings[key] = newvalue;
-    
-    // en opslaan naar file
-    this.PersistSettings();
-}
-
-SettingsService.prototype.PersistSettings = function() {
-    SaveXmlToFile(this.Settings.Serialize(), "config.xml");
+    this.PersistSettings = function() {
+        var xml = SerializeList(this.Settings, "settings");
+        
+        SaveXmlToFile(xml, "config.xml");
+    }
 }
 
 

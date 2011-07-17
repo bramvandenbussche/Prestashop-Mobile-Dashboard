@@ -12,9 +12,10 @@ var savedCustomers = [];
 // List of Order objects
 var savedOrders = [];
 
+
 $(document).ready(function() {
     
-    // Settinsg inladen
+    // Settinsg inladenS
     SettingsService.LoadSettings();
     
     // Tabbladen aanmaken
@@ -48,8 +49,6 @@ $(document).ready(function() {
         
         // De juiste klant selecteren
         $("#accordion").accordion( "activate" , "#customer_" + customerID);
-        
-        air.trace($("#customer_" + customerID));
     });
     
 });
