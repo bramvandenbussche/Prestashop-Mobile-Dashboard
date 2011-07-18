@@ -12,7 +12,6 @@
         <content>PrestashopMobileDashboard.html</content>
         <width>480</width>
         <height>800</height>
-		<systemChrome>none</systemChrome>
 		<resizable>true</resizable>
 		<minSize>480 800</minSize>
 		<visible>true</visible>

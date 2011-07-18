@@ -1,0 +1,1 @@
+adt -package -storetype pkcs12 -keystore ../selfCert.pfx ../build/PrestashopMobileDashboard.air prestashopMobileDashboard-app.xml .

@@ -15,32 +15,27 @@ var savedOrders = [];
 
 $(document).ready(function() {
     
-    // Settinsg inladenS
+    // Settinsg inladen
     SettingsService.LoadSettings();
+    
     
     // Tabbladen aanmaken
     $("#tabs").tabs({
         select: function(event, ui) {
             switch($(ui.tab).attr("name")) {
                 case "customers" : 
-                    GetCustomers();
+                    CustomerService.GetCustomers();
                     break;
             
                 case "orders" : 
-                    GetOrders();
+                    OrderService.GetOrders();
                     break;
             }
         }
     });
     
-    // Settingswijzigingen opvangen
-    $("#api_key").blur(function() {
-        SettingsService.ChangeSetting('PS_MOBILE_API_KEY', $(this).val());
-        
-        // Check credentials
-        //CheckCredentials();
-    });
     
+    // View Customer handler
     $(".ViewCustomer").live('click', function() {
         var customerID = $(this).attr("id");
         
@@ -51,21 +46,16 @@ $(document).ready(function() {
         $("#accordion").accordion( "activate" , "#customer_" + customerID);
     });
     
+    
+    // Save settings handler
+    $("#btnSaveSettings").click(function() {
+        // Settings opslaan
+        SettingsService.SaveSettings();
+        
+        // Credentials checken
+        PrestashopService.CheckCredentials();
+    });
+    
 });
 
 
-function SetCredentials() {
-    
-    if (PS_MOBILE_AUTHORIZATION.api.order_details["get"])
-        $("#tabs").tabs("enable", 1);
-    else
-        $("#tabs").tabs("disable", 1);
-        
-    if (PS_MOBILE_AUTHORIZATION.api.customers["get"])
-        $("#tabs").tabs("enable", 2);
-    else
-        $("#tabs").tabs("disable", 2);
-        
-    // Beschikbare order staten ophalen
-    GetOrderStates();
-}

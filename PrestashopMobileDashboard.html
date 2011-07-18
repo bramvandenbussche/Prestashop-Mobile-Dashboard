@@ -32,16 +32,15 @@
         <!--// Classes / Entities -->
         <script src="js/classes/entities/order.js" type="text/javascript"></script>
         <script src="js/classes/entities/orderstate.js" type="text/javascript"></script>
-        <script src="js/classes/entities/orderstates.js" type="text/javascript"></script>
         <script src="js/classes/entities/product.js" type="text/javascript"></script>
         <script src="js/classes/entities/setting.js" type="text/javascript"></script>
-        <script src="js/classes/entities/settings.js" type="text/javascript"></script>
         
         <!--// Classes / Service -->
         <script src="js/classes/service/order_service.js" type="text/javascript"></script>
         <script src="js/classes/service/orderstates_service.js" type="text/javascript"></script>
         <script src="js/classes/service/customer_service.js" type="text/javascript"></script>
         <script src="js/classes/service/settings_service.js" type="text/javascript"></script>
+        <script src="js/classes/service/prestashop_service.js" type="text/javascript"></script>
         
     </head>
     
@@ -78,6 +77,9 @@
                         <p>Het aantal orders dat tegelijkertijd moet worden opgehaald:</p>
                         <input type="text" id="order_limit" value="" style="width: 50px;" />
                     </div>
+					<p class="AlignRight">
+						<button id="btnSaveSettings" class="btn">Save</button>
+					</p>
                 </div>
             </div>
             

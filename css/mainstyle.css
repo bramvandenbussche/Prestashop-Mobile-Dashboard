@@ -5,6 +5,9 @@ body * {
     color: #333;
 }
 
+.AlignRight { text-align: right; }
+.AlignCenter { text-align: center; }
+
 input[type=text] {
     padding: 4px;
     font-size: 11px;

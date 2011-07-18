@@ -43,16 +43,7 @@ var SettingsService = new function() {
         
         if (xml != undefined) {
             // if there is, load the settings from it
-            $.each($("setting", xml), function() {
-                var s = new Setting();
-				
-				// Setting aanmaken vanuit xml
-                s.Deserialize($(this));
-				
-				// Setting opslaan
-                root.AddSetting(s);
-            });
-            
+            this.LoadSettingsFromXml(xml);            
         } else {
             // if there isn't, create the default settings
             this.CreateDefaultSettings();
@@ -63,6 +54,22 @@ var SettingsService = new function() {
         
         // and display them
         this.RenderSettings();
+        
+        // and then we check the service to get an authorisation ticket
+        PrestashopService.CheckCredentials();
+    }
+    
+    
+    this.LoadSettingsFromXml = function(xml) {
+        $.each($("setting", xml), function() {
+            var s = new Setting();
+            
+            // Setting aanmaken vanuit xml
+            s.Deserialize($(this));
+            
+            // Setting opslaan
+            root.AddSetting(s);
+        });
     }
 	
 	
@@ -95,55 +102,18 @@ var SettingsService = new function() {
         
         SaveXmlToFile(xml, "config.xml");
     }
-}
-
-
-function CheckCredentials() {
-
-    var PS_MOBILE_API_URL = "http://" + PS_MOBILE_SHOP_URL + "/api";
     
-    var checkCredentialsArgs = {
-        url: PS_MOBILE_API_URL,
-        method: "GET",
-        dataType: "xml",
-        beforeSend: function(jqXHR, settings) {
-            // Check button aanpassen
-            $("#settings_status").html("checking");
-            $("#settings_status").attr("status", "checking");
-            
-            // Authentication
-            PrepareAjaxCredentials(jqXHR);
-        },
-        success: function(data, textStatus, jqXHR) {
-            
-            // Credentials die terugkomen omzetten naar json en beschikbaar maken in applicatie
-            PS_MOBILE_AUTHORIZATION = $.xml2json(data);
-            
-            // Check button aanpassen
-            $("#settings_status").html("checked");
-            $("#settings_status").attr("status", "checked");
-            
-            // Check user credentials
-            SetCredentials();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            // Check button aanpassen
-            $("#settings_status").html("unchecked");
-            $("#settings_status").attr("status", "unchecked");
-            
-            // Debug info
-            $("#debug").html("Error occurred in ajax call:<br />" + errorThrown);
-        }
+    this.SaveSettings = function() {
+        // Shop url
+        this.Settings['PS_MOBILE_SHOP_URL'].Value = $("#shop_url").val();
+        
+        // Api Key instellen
+        this.Settings['PS_MOBILE_API_KEY'].Value = $("#api_key").val();
+        
+        // View settings
+        this.Settings['PS_MOBILE_ORDER_VIEW_LIMIT'].Value = $("#order_limit").val();
+        
+        // Settings opslaan in file
+        this.PersistSettings();
     }
-    
-    $.ajax(checkCredentialsArgs);
-};
-
-
-function PrepareAjaxCredentials(jqXHR) {
-    var bytes = Crypto.charenc.Binary.stringToBytes(SettingsService.Settings['PS_MOBILE_API_KEY'] + ":" + PS_MOBILE_PASSWORD);
-    var base64 = Crypto.util.bytesToBase64(bytes);
-    jqXHR.setRequestHeader("Authorization", "Basic " + base64);
 }
-
-

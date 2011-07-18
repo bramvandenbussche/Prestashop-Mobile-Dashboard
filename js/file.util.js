@@ -16,7 +16,7 @@ function GetTemplateByName(_templateName) {
 
 
 function SaveXmlToFile(xml, filename) {
-    air.trace("Writing to file...");
+    air.trace("Writing to file " + filename + "...");
     var data = xml;
     var file = new air.File();
     var stream = null;
@@ -31,13 +31,12 @@ function SaveXmlToFile(xml, filename) {
 
 
 function LoadXmlFromFile(filename) {
+    air.trace("Loading file " + filename + "...");
     var data = null;
     var file = new air.File();
     var stream = null;
     
     file = air.File.applicationStorageDirectory.resolvePath(filename);
-    
-    air.trace(file.nativePath);
     
     if (file.exists) {
         stream = new air.FileStream();
