@@ -17,10 +17,10 @@ Setting = function() {
 Setting.prototype.Serialize = function() {
     var str = '<setting>';
     
-    str += '<name>' + this.Name + '</name>';
-    str += '<value>' + this.Value + '</value>';
-    str += '<description>' + this.Description + '</description>';
-    str += '<type>' + this.Type + '</type>';
+		str += '<name>' + this.Name + '</name>';
+		str += '<value>' + this.Value + '</value>';
+		str += '<description>' + this.Description + '</description>';
+		str += '<type>' + this.Type + '</type>';
     
     str += '</setting>';
     
@@ -28,8 +28,8 @@ Setting.prototype.Serialize = function() {
 }
 
 Setting.prototype.Deserialize = function(xml) {
-    this.name = $("name", xml).html();
-    this.value = $("value", xml).html();
-    this.description = $("description", xml).html();
+    this.Name = $("name", xml).html();
+    this.Value = $("value", xml).html();
+    this.Description = $("description", xml).html();
     this.Type = $("type", xml).html();
 }

@@ -45,9 +45,12 @@ var SettingsService = new function() {
             // if there is, load the settings from it
             $.each($("setting", xml), function() {
                 var s = new Setting();
+				
+				// Setting aanmaken vanuit xml
                 s.Deserialize($(this));
-                
-                this.Settings[s.Name] = s;
+				
+				// Setting opslaan
+                root.AddSetting(s);
             });
             
         } else {
@@ -61,17 +64,22 @@ var SettingsService = new function() {
         // and display them
         this.RenderSettings();
     }
+	
+	
+	this.AddSetting = function(setting) {
+		this.Settings[setting.Name] = setting;
+	}
     
     
     this.RenderSettings = function() {
         // Shop url
-        $("#shop_url").val(this.Settings['PS_MOBILE_SHOP_URL']);
+        $("#shop_url").val(this.Settings['PS_MOBILE_SHOP_URL'].Value);
         
         // Api Key instellen
-        $("#api_key").val(this.Settings['PS_MOBILE_API_KEY']);
+        $("#api_key").val(this.Settings['PS_MOBILE_API_KEY'].Value);
         
         // View settings
-        $("#order_limit").val(this.Settings['PS_MOBILE_ORDER_VIEW_LIMIT']);
+        $("#order_limit").val(this.Settings['PS_MOBILE_ORDER_VIEW_LIMIT'].Value);
     }
 
     this.ChangeSetting = function(key, newvalue) {
